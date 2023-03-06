@@ -1,10 +1,11 @@
 import React from "react";
-import styles from "./styles.m.styl";
-import Navbar from "../Navbar";
-import OrdersList from "../../screens/Orders/List";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { GlobalStateProvider, GlobalState } from "~/screens/globalState";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { GlobalState, GlobalStateProvider } from "~/screens/globalState";
 import OrdersShow from "~/screens/Orders/Show";
+import OrdersList from "../../screens/Orders/List";
+import Empty from "../Empty";
+import Navbar from "../Navbar";
+import styles from "./styles.m.styl";
 
 function Index(): JSX.Element {
   const [globalState] = React.useState(new GlobalState());
@@ -21,6 +22,9 @@ function Index(): JSX.Element {
             </Route>
             <Route path="/orders">
               <OrdersList />
+            </Route>
+            <Route>
+              <Empty />
             </Route>
           </Switch>
         </div>

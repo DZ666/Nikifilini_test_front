@@ -11,7 +11,7 @@ interface StatusProps {
 const DeliveryType = observer(
   ({ code }: StatusProps): JSX.Element => {
     const globalState = useGlobalState();
-    const name = find(globalState.deliveryTypes, { code })?.name || code;
+    const name = find(globalState.deliveryTypes, { code })?.name || code || "-";
 
     let color: "blue" | "grey" = "blue";
     switch (code) {

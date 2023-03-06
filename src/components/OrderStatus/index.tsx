@@ -1,8 +1,7 @@
 import Tag from "components/Tag";
-import React from "react";
-import { useGlobalState } from "~/screens/globalState";
 import { find } from "lodash";
 import { observer } from "mobx-react-lite";
+import { useGlobalState } from "~/screens/globalState";
 
 interface StatusProps {
   code: string;
@@ -11,7 +10,7 @@ interface StatusProps {
 const OrderStatus = observer(
   ({ code }: StatusProps): JSX.Element => {
     const globalState = useGlobalState();
-    const name = find(globalState.orderStatuses, { code })?.name || code;
+    const name = find(globalState.orderStatuses, { code })?.name || code || "-";
 
     let color: "blue" | "grey" | "green";
     switch (code) {

@@ -11,7 +11,7 @@ interface StatusProps {
 const ProductStatus = observer(
   ({ code }: StatusProps): JSX.Element => {
     const globalState = useGlobalState();
-    const name = find(globalState.productStatuses, { code })?.name || code;
+    const name = find(globalState.productStatuses, { code })?.name || code || "-";
 
     let color: "blue" | "grey" | "green" | "red";
     switch (code) {

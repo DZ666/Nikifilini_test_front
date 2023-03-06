@@ -1,0 +1,47 @@
+@import '../../../../../common.styl'
+
+.order
+  width: 100%
+  height: 100%
+
+  display flex
+  flex-direction column
+
+  padding: 32px 64px
+
+  position relative
+
+  .header
+    display flex
+    justify-content space-between
+    align-items center
+
+    a
+      color #000000
+      font-size 16px
+      font-weight 600
+
+      &:hover
+        text-decoration none
+
+  .deliveryCode
+    margin-top 32px
+    font-size 24px
+
+  .orderLoading
+    width 100%
+    height 100%
+    display flex
+    justify-content center
+    align-items center
+    font-size 24px
+
+  .orderNumber
+    font-size 24px
+    font-weight 600
+    color #000000
+
+  .items
+    display flex
+    flex-direction row
+    flex-wrap: nowrap

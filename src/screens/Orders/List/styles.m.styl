@@ -1,4 +1,55 @@
 @import '../../../common.styl'
 
-.screen
-  background white
+.screenWrapper
+  display flex
+  justify-content center
+
+  width 100%
+  max-height 100vh
+  overflow-y auto
+
+  .screen
+    width 100%
+    max-width calc(100% - 65px)
+
+    .loading
+      display flex
+      justify-content center
+      align-items center
+      height 100%
+
+    .pagination
+      display flex
+      justify-content center
+      margin-top 32px
+      margin-bottom 64px
+      gap 16px
+
+    .table
+      width 100%
+      margin-top 32px
+      background-color #fff
+      box-shadow 0px 4px 20px rgba(0, 0, 0, 0.25)
+      border-radius 8px
+      overflow hidden
+
+      display flex
+      flex-direction column
+
+      .head
+        background-color #f8f8f8
+
+        .row
+          display flex
+          justify-content space-between
+          padding 16px
+
+          div
+            flex 1
+            text-align center
+
+      .body
+        display flex
+        flex-direction column
+
+        padding 16px

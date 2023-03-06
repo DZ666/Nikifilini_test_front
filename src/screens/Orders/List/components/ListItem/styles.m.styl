@@ -1,17 +1,23 @@
 @import '../../../../../common.styl'
 
 .row
-  min-height 64px
+  display: flex
+  justify-content: space-between
+  padding: 16px 0
+  border-bottom: 1px solid $border-color
+  min-height: 64px
 
   div
-    display flex
+    flex 1
     align-items center
+    
+    text-align center
 
-    div
-      width 80%
+    .deliveryCode
+      font-size: 14px
+      font-weight: 500
+      color: $primary-dark
 
-    &:last-child div
-      width 100%
 
 .orderNumber
   font-weight 500

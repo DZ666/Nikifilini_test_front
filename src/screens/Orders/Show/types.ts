@@ -27,13 +27,14 @@ export interface RetailItemInfo {
 export interface SingleOrderItem {
   id: number;
   quantity: number;
-  properties: {
-    [key: string]: {
+  status: string;
+  properties: [
+    {
       code: string;
       name: string;
       value: string;
-    };
-  };
+    }
+  ];
   offer: {
     name: string;
     displayName: string;

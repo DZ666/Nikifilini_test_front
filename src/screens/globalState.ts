@@ -37,12 +37,41 @@ export class GlobalState {
 
   get orderStatuses() {
     if (this.status.orderStatuses === null) {
+      this.status.orderStatuses = client
+        .query(ORDER_STATUSES_QUERY)
+        .toPromise()
+        .then(({ data: { orderStatuses } }) => {
+          this.setOrderStatuses(orderStatuses);
+        });
     }
     return this.data.orderStatuses;
   }
 
+  get productStatuses() {
+    if (this.status.productStatuses === null) {
+      this.status.productStatuses = client
+        .query(PRODUCT_STATUSES_QUERY)
+        .toPromise()
+        .then(({ data: { productStatuses } }) => {
+          this.setProductStatuses(productStatuses);
+        });
+    }
+    return this.data.productStatuses;
+  }
+
+  get deliveryTypes() {
+    if (this.status.deliveryTypes === null) {
+      this.status.deliveryTypes = client
+        .query(DELIVERY_TYPES_QUERY)
+        .toPromise()
+        .then(({ data: { deliveryTypes } }) => {
+          this.setDeliveryTypes(deliveryTypes);
+        });
+    }
+    return this.data.deliveryTypes;
+  }
+
   setOrderStatuses(statuses: CrmType[]) {
-    console.log(statuses);
     this.data.orderStatuses = statuses;
     this.status.orderStatuses = true;
   }
@@ -55,18 +84,6 @@ export class GlobalState {
   setDeliveryTypes(statuses: CrmType[]) {
     this.data.deliveryTypes = statuses;
     this.status.deliveryTypes = true;
-  }
-
-  get productStatuses() {
-    if (this.status.productStatuses === null) {
-    }
-    return this.data.productStatuses;
-  }
-
-  get deliveryTypes() {
-    if (this.status.deliveryTypes === null) {
-    }
-    return this.data.deliveryTypes;
   }
 }
 

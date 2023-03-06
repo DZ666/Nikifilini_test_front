@@ -12,13 +12,21 @@ export default class OrdersListState {
   orders: OrdersListItem[] = [];
   history: History;
 
+  getSearchPage() {
+    return Number(new URL(window.location.href).search.split("=")[1]);
+  }
+
   setInitialized(val: boolean) {
     this.initialized = val;
+
+    this.setPage(this.getSearchPage() || this.page);
   }
 
   constructor() {
     makeAutoObservable(this);
     this.history = createBrowserHistory();
+
+    this.setPage(this.getSearchPage() || this.page);
   }
 
   setOrders(orders: OrdersListItem[]): void {
@@ -33,25 +41,28 @@ export default class OrdersListState {
     this.loading = false;
   }
 
-  setPage(page: number): void {
+  setPage(page: number = this.getSearchPage()): void {
     this.page = page;
     const url = new URL(window.location.href);
     if (url.searchParams.get("page") !== this.page.toString()) {
       url.searchParams.set("page", "" + this.page);
-      this.history.replace(url.pathname + url.search, {});
+
+      this.history.push(`${url.pathname}${url.search}`);
     }
   }
 
   nextPage(): void {
     if (this.page >= this.totalPages) return;
-    this.setPage(this.page + 1);
-    this.loading = true;
-    this.loadOrders();
+    this.definePage(this.page + 1);
   }
 
   prevPage(): void {
     if (this.page <= 1) return;
-    this.setPage(this.page - 1);
+    this.definePage(this.page - 1);
+  }
+
+  definePage(page: number): void {
+    this.setPage(page);
     this.loading = true;
     this.loadOrders();
   }
@@ -70,6 +81,24 @@ export default class OrdersListState {
 
   async loadOrders() {
     this.loading = true;
+    await client
+      .query(GET_ORDERS_QUERY, {
+        page: this.page,
+      })
+      .toPromise()
+      .then(
+        ({
+          data: {
+            getOrders: {
+              orders,
+              pagination: { totalPageCount },
+            },
+          },
+        }) => {
+          this.setOrders(orders);
+          this.setTotalPages(totalPageCount);
+        }
+      );
     this.loading = false;
   }
 

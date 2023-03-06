@@ -1,20 +1,20 @@
-import React from "react";
-import styles from "./styles.m.styl";
-import { OrdersListItem } from "../../types";
+import DeliveryType from "components/DeliveryType";
+import OrderStatus from "components/OrderStatus";
 import { observer } from "mobx-react-lite";
 import moment from "moment";
 import "moment/locale/ru";
-import Tag from "components/Tag";
-import OrderStatus from "components/OrderStatus";
-import DeliveryType from "components/DeliveryType";
 import { Link } from "react-router-dom";
+import { OrdersListItem } from "../../types";
+import styles from "./styles.m.styl";
 
 const ListItem = observer(
-  ({ order }: { order: OrdersListItem }): JSX.Element => {
+  ({ order, page }: { order: OrdersListItem; page: number }): JSX.Element => {
     return (
       <div className={styles.row}>
         <div className={styles.orderNumber}>
-          <Link to={`/orders/${order.id}`}>{order.number}</Link>
+          <Link to={`/orders/${order.number}?page=${page}`}>
+            {order.number}
+          </Link>
         </div>
         <div>{moment(order.createdAt).format("DD.MM.YYYY HH:mm")}</div>
         <div title={order.delivery?.code}>

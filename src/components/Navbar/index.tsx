@@ -1,21 +1,22 @@
 /* eslint-disable max-len */
-import React from "react";
-import styles from "./styles.m.styl";
-import ListIcon from "../../assets/icons/list-solid.svg";
-import QrcodeIcon from "~/assets/icons/qrcode-solid.svg";
-import CogIcon from "~/assets/icons/cog-solid.svg";
 import classNames from "classnames";
-import Logo from "./logo.svg";
+import { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import CogIcon from "~/assets/icons/cog-solid.svg";
+import QrcodeIcon from "~/assets/icons/qrcode-solid.svg";
+import ListIcon from "../../assets/icons/list-solid.svg";
+import Logo from "./logo.svg";
+import styles from "./styles.m.styl";
 
 function Navbar(): JSX.Element {
   useRouteMatch();
+  
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
         <Logo />
       </div>
-      <Link to={"/orders"}>
+      <Link to={"/orders?page=1"}>
         <div
           className={classNames({
             [styles.element]: true,
